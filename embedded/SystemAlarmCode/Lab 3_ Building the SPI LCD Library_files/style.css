@@ -1,0 +1,70 @@
+/* assets/css/style.css */
+body {
+  font-family: sans-serif;
+  margin: 25;
+  padding: 15;
+}
+
+.top-nav {
+  background-color: #333;
+  padding: 10px;
+}
+
+.top-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+.top-nav a {
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar li.active a {
+  text-decoration: underline;
+  font-weight: bold;
+  color: #cad4d5; /* optional: make it stand out */
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  font-size: large;
+}
+
+.sidebar {
+  min-width: 250px;
+  padding: 10px;
+  background-color: #4f819a;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  font-size: large;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5em;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #f0f0f0;
+}
+
+pre, code {
+  background-color: #d1cccc;
+  padding: 0.5em;
+  border-radius: 5px;
+  font-family: monospace;
+}

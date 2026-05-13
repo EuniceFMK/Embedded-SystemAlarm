@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)https://carlosestay.com/courses/CMPE2250/Assignments/lab03/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-math {
+  display: inline-block;
+  text-align: left;
+  line-height: 0;
+  text-indent: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 100%;
+  font-size-adjust: none;
+  letter-spacing: normal;
+  border-collapse: collapse;
+  word-wrap: normal;
+  word-spacing: normal;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 1px 0;
+}
+
+mjx-container[jax="CHTML"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="CHTML"][display="true"][width="full"] {
+  display: flex;
+}
+
+mjx-container[jax="CHTML"][display="true"] mjx-math {
+  padding: 0;
+}
+
+mjx-container[jax="CHTML"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="CHTML"][justify="right"] {
+  text-align: right;
+}
+
+mjx-mn {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-c {
+  display: inline-block;
+}
+
+mjx-utext {
+  display: inline-block;
+  padding: .75em 0 .2em 0;
+}
+
+mjx-mo {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-stretchy-h {
+  display: inline-table;
+  width: 100%;
+}
+
+mjx-stretchy-h > * {
+  display: table-cell;
+  width: 0;
+}
+
+mjx-stretchy-h > * > mjx-c {
+  display: inline-block;
+  transform: scalex(1.0000001);
+}
+
+mjx-stretchy-h > * > mjx-c::before {
+  display: inline-block;
+  width: initial;
+}
+
+mjx-stretchy-h > mjx-ext {
+  /* IE */ overflow: hidden;
+  /* others */ overflow: clip visible;
+  width: 100%;
+}
+
+mjx-stretchy-h > mjx-ext > mjx-c::before {
+  transform: scalex(500);
+}
+
+mjx-stretchy-h > mjx-ext > mjx-c {
+  width: 0;
+}
+
+mjx-stretchy-h > mjx-beg > mjx-c {
+  margin-right: -.1em;
+}
+
+mjx-stretchy-h > mjx-end > mjx-c {
+  margin-left: -.1em;
+}
+
+mjx-stretchy-v {
+  display: inline-block;
+}
+
+mjx-stretchy-v > * {
+  display: block;
+}
+
+mjx-stretchy-v > mjx-beg {
+  height: 0;
+}
+
+mjx-stretchy-v > mjx-end > mjx-c {
+  display: block;
+}
+
+mjx-stretchy-v > * > mjx-c {
+  transform: scaley(1.0000001);
+  transform-origin: left center;
+  overflow: hidden;
+}
+
+mjx-stretchy-v > mjx-ext {
+  display: block;
+  height: 100%;
+  box-sizing: border-box;
+  border: 0px solid transparent;
+  /* IE */ overflow: hidden;
+  /* others */ overflow: visible clip;
+}
+
+mjx-stretchy-v > mjx-ext > mjx-c::before {
+  width: initial;
+  box-sizing: border-box;
+}
+
+mjx-stretchy-v > mjx-ext > mjx-c {
+  transform: scaleY(500) translateY(.075em);
+  overflow: visible;
+}
+
+mjx-mark {
+  display: inline-block;
+  height: 0px;
+}
+
+mjx-mi {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+
+mjx-c.mjx-c31::before {
+  padding: 0.666em 0.5em 0 0;
+  content: "1";
+}
+
+mjx-c.mjx-c36::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "6";
+}
+
+mjx-c.mjx-c30::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "0";
+}
+
+mjx-c.mjx-cD7::before {
+  padding: 0.491em 0.778em 0 0;
+  content: "\D7";
+}
+
+mjx-c.mjx-c32::before {
+  padding: 0.666em 0.5em 0 0;
+  content: "2";
+}
+
+mjx-c.mjx-c38::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "8";
+}
+
+mjx-c.mjx-c2C::before {
+  padding: 0.121em 0.278em 0.194em 0;
+  content: ",";
+}
+
+mjx-c.mjx-c34::before {
+  padding: 0.677em 0.5em 0 0;
+  content: "4";
+}
+
+mjx-c.mjx-c28::before {
+  padding: 0.75em 0.389em 0.25em 0;
+  content: "(";
+}
+
+mjx-c.mjx-c1D465.TEX-I::before {
+  padding: 0.442em 0.572em 0.011em 0;
+  content: "x";
+}
+
+mjx-c.mjx-c1D466.TEX-I::before {
+  padding: 0.442em 0.49em 0.205em 0;
+  content: "y";
+}
+
+mjx-c.mjx-c29::before {
+  padding: 0.75em 0.389em 0.25em 0;
+  content: ")";
+}
+</style></head><body><htm lang="en">
+
+  <title>Lab #3: Building the SPI LCD Library</title>
+  <link rel="stylesheet" href="./Lab 3_ Building the SPI LCD Library_files/style.css">
+  <!-- MathJax for LaTeX rendering -->
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    }
+  };
+  </script>
+  <script async="" src="./Lab 3_ Building the SPI LCD Library_files/tex-mml-chtml.js.download"></script>
+  <!-- Mermaid for diagrams -->
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: true });
+</script>  
+
+
+  <nav>
+
+</nav>
+
+
+  <div class="page-wrapper">
+    
+    <div class="content">
+      <h1 id="-lab-3-cmpe2250-building-the-spi-lcd-library">📚 LAB 3 CMPE2250: Building the SPI LCD Library</h1>
+
+<h2 id="-overview-and-introduction">📋 Overview and Introduction</h2>
+
+<ul>
+  <li>In this lab, you will develop a driver for a 160x128 TFT LCD using the ST7735 controller. You will learn how to bridge low-level SPI communication with high-level graphics functions.</li>
+</ul>
+
+<p><img src="./Lab 3_ Building the SPI LCD Library_files/lcd.png" alt="LCD"></p>
+
+<h3 id="hardware-configuration">Hardware Configuration</h3>
+
+<ul>
+  <li>The LCD module hardware circuit comprises two parts: an LCD display control circuit and a backlight control circuit.</li>
+  <li>The LCD display control circuit is used to control the pins of the LCD, including control pins and data transfer pins.</li>
+  <li>The backlight control circuit is used to control the backlight to be on and off. Of course, if the backlight is not required to be controlled, the backlight control pin can be directly connected to the 3.3V power supply without using the circuit.</li>
+</ul>
+
+<h3 id="working-principle">Working Principle</h3>
+
+<ol>
+  <li>Introduction to ST7735S Controller</li>
+</ol>
+
+<ul>
+  <li>
+    <p>The ST7735S controller supports a maximum resolution of 132*162 and a 48114-byte GRAM. It also supports 8-bit, 9-bit, 16-bit, and 18-bit parallel port data buses. It also supports 3-wire and 4-wire SPI serial ports.</p>
+  </li>
+  <li>
+    <p>Since parallel control requires a large number of IO ports, the most common one is SPI serial port control. The ST7735S also supports 65K, 262K RGB color display, display color is very rich, while supporting rotating display and scroll display and video playback, display in a variety of ways.</p>
+  </li>
+  <li>
+    <p>The ST7735S controller uses 16bit (RGB565) to control a pixel display, so it can display up to 65K colors per pixel. The pixel address setting is performed in the order of rows and columns, and the incrementing and decreasing direction is determined by the scanning mode. The ST7735S display method is performed by setting the address and then setting the color value.</p>
+  </li>
+</ul>
+
+<ol>
+  <li>Introduction to SPI communication protocol</li>
+</ol>
+
+<ul>
+  <li>The 4-wire SPI bus write mode timing is shown in the following figure:</li>
+</ul>
+
+<p><img src="./Lab 3_ Building the SPI LCD Library_files/4-wire-spi.png" alt="4-Wire SPI"></p>
+
+<ul>
+  <li>CSX is a slave chip select, and the chip is enabled only when CSX is low.</li>
+  <li>D/CX is the data/command control pin of the chip. When DCX is low, the command is written.When it is high, the data is written.</li>
+  <li>SCL is the SPI bus clock, and each rising edge transmits 1 bit of data.</li>
+  <li>SDA is the data transmitted by SPI, and it transmits 8-bit data at a time. The data format is as shown below:</li>
+</ul>
+
+<p><img src="./Lab 3_ Building the SPI LCD Library_files/spi-data-format.png" alt="4-Wire SPI"></p>
+
+<ul>
+  <li>The high position is in front and transmitted first (MSB first).</li>
+  <li>For SPI communication, the data has a transmission timing, that is, a combination of clock phase (CPHA) and clock polarity (CPOL):
+    <ul>
+      <li>The CPOL level determines the idle state level of the serial synchronous clock, CPOL = 0, which is low. CPOL does not have a lot of impact on the transport protocol.</li>
+      <li>The level of CPHA determines whether the serial synchronous clock is acquired on the first clock transition edge or the second clock transition edge.</li>
+      <li>When CPHL = 0, data acquisition is performed on the first edge of the transition;</li>
+      <li>The combination of the two becomes the four SPI communication methods. SPI0 is usually used in China, that is, CPHL = 0, CPOL = 0.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="1️⃣-preparatory-work">1️⃣ Preparatory Work</h2>
+
+<ul>
+  <li>We suggest using this pin connections to be able to test the binary provided by the instructor</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>NUMBER</th>
+      <th>PIN</th>
+      <th>DESC</th>
+      <th>NUCLEO PIN</th>
+      <th>AF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>VCC</td>
+      <td>3.3V</td>
+      <td>*</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>GND</td>
+      <td>Ground</td>
+      <td>*</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>CS</td>
+      <td>GPIO (active LOW)</td>
+      <td>PD5</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>RESET</td>
+      <td>GPIO (active LOW)</td>
+      <td>PC8</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>A0</td>
+      <td>GPIO, CMD = 0 / DATA = 1</td>
+      <td>PC6</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>SDA</td>
+      <td>SPI MOSI</td>
+      <td>PA12</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>SCK</td>
+      <td>SPI Clock</td>
+      <td>PB3</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>LED</td>
+      <td>PWM backlight, any PWM Pin or 3.3V</td>
+      <td>Any</td>
+      <td>*</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="2️⃣-header-and-data-structures">2️⃣ Header and Data Structures</h2>
+
+<ol>
+  <li>
+    <p>The provided data struct defines the Driver Struct:</p>
+
+    <ul>
+      <li>Addresses of the SPI peripheral</li>
+      <li>Timer for delays</li>
+      <li>GPIO ports/pins for:
+        <ul>
+          <li>CS (Chip Select)</li>
+          <li>RST (Reset)</li>
+          <li>DC (Data/Command).</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<pre>    typedef struct LCD_Driver__ 
+    {
+        TIM_TypeDef* timer;
+        SPI_TypeDef* spi;       
+        GPIO_TypeDef* csPort;
+        uint16_t csPin;
+        GPIO_TypeDef* rstPort;
+        uint16_t rstPin;
+        GPIO_TypeDef* dcPort;
+        uint16_t dcPin;
+    } LCD_Driver_t;
+</pre>
+
+<ul>
+  <li>All the GPIO pins must be initialized as <strong>Ouput</strong></li>
+</ul>
+
+<ol>
+  <li>Define Constants: Set your screen width (160) and height (128).</li>
+</ol>
+
+<pre>    #define ST7735_WIDTH  160
+    #define ST7735_HEIGHT 128
+</pre>
+
+<ul>
+  <li>Ultimately the width and height will depend on the orientation (portrait or landscape)</li>
+</ul>
+
+<ol>
+  <li>Rotation Enums: Define an enumeration for screen rotation to make your code readable.</li>
+</ol>
+
+<pre>    typedef enum LCD_Rotation__ 
+    {
+        LCD_ROT_0_P1 = 0x00,
+        LCD_ROT_0_P2 = 0xC0,    
+        LCD_ROT_90_CW = 0x60,
+        LCD_ROT_180 = 0xC0,
+        LCD_ROT_270_CW = 0xA0
+    }LCD_Rotation_t;
+</pre>
+
+<h2 id="3️⃣-low-level-communication-the-private-functions">3️⃣ Low-Level Communication (The “Private” Functions)</h2>
+
+<ul>
+  <li>
+    <p>The ST7735 distinguishes between a Command and Data using the DC pin.</p>
+  </li>
+  <li>
+    <p>Command Mode: <code class="language-plaintext highlighter-rouge">Pull DC LOW</code>, <code class="language-plaintext highlighter-rouge">pull CS LOW</code>, send the byte via SPI, then <code class="language-plaintext highlighter-rouge">pull CS HIGH</code>.</p>
+  </li>
+  <li>
+    <p>Data Mode: <code class="language-plaintext highlighter-rouge">Pull DC HIGH</code>, <code class="language-plaintext highlighter-rouge">pull CS LOW</code>, send the byte(s) via SPI, then <code class="language-plaintext highlighter-rouge">pull CS HIGH</code>.</p>
+  </li>
+  <li>
+    <p>Buffer Support: Implement “Buf” versions of these functions to send arrays of data (essential for filling the screen quickly).</p>
+  </li>
+</ul>
+
+<pre>    void LCD_ST7735_Cmd(LCD_Driver_t* lcd, uint8_t c);
+    void LCD_ST7735_CmdBuf(LCD_Driver_t* lcd, uint8_t *cmdBuf, uint8_t *rxDataBuf, uint32_t len);
+    void LCD_ST7735_Data(LCD_Driver_t* lcd, uint8_t d);
+    void LCD_ST7735_DataBuf(LCD_Driver_t* lcd, uint8_t *txDataBuf, uint8_t *rxDataBuf, uint32_t len);
+</pre>
+
+<ul>
+  <li>Since these functions are private helpers, they should be declares as prototypes on the top inside <em>st7735.c</em>, not accesible from <em>st7735.h</em></li>
+</ul>
+
+<h2 id="4️⃣-hardware-initialization-low-level-and-reset">4️⃣ Hardware Initialization (low level) and Reset</h2>
+<p>Before sending commands, the hardware needs to be physically ready.</p>
+
+<ul>
+  <li><strong>HAL Init</strong>: Write a function to assign the GPIO and SPI handles to your driver struct and initialize those pins as outputs.</li>
+</ul>
+
+<pre>    void LCD_ST7735_HAL_Init(LCD_Driver_t* lcd, SPI_TypeDef* spi, 
+                            GPIO_TypeDef* cs_Port, uint16_t cs_Pin,
+                            GPIO_TypeDef* rst_Port, uint16_t rst_Pin,
+                            GPIO_TypeDef* dc_Port, uint16_t dc_Pin)
+    {
+        // 1. Assign the passed SPI and GPIO parameters to the 'lcd' struct members.
+        // 2. Initialize the CS, RST, and DC pins as Output pins using your GPIO driver.
+        // 3. Set CS High and RST High as their default 'idle' states.
+    }
+</pre>
+
+<ul>
+  <li>
+    <p><em>*Hardware Reset</em>: To reset the ST7735, toggle the RST pin:</p>
+
+    <ul>
+      <li>
+        <p>Pull RST LOW.</p>
+      </li>
+      <li>
+        <p>Wait ~10ms.</p>
+      </li>
+      <li>
+        <p>Pull RST HIGH.</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<pre>    void LCD_ST7735_Reset(LCD_Driver_t* lcd)
+    {
+        // 1. Pull the RST pin LOW.
+        // 2. Delay for 10ms (Use your Timer_Delay_ms function).
+        // 3. Pull the RST pin HIGH.
+    }
+</pre>
+
+<h2 id="5️⃣-the-initsequence">5️⃣ The “InitSequence”</h2>
+
+<ul>
+  <li>
+    <p>Goal: Wake the hardware up in the correct order.</p>
+
+    <ul>
+      <li>
+        <p>Hardware Reset: Call your Reset function.</p>
+      </li>
+      <li>
+        <p>Delay: Wait <code class="language-plaintext highlighter-rouge">120ms</code> (crucial for the controller to stabilize).</p>
+      </li>
+      <li>
+        <p>Sleep Out: Send <code class="language-plaintext highlighter-rouge">Command 0x11</code>.</p>
+      </li>
+      <li>
+        <p>Delay: Wait another <code class="language-plaintext highlighter-rouge">120ms</code>.</p>
+      </li>
+      <li>
+        <p>Color Mode: Send<code class="language-plaintext highlighter-rouge"> Command 0x3A</code>, then <code class="language-plaintext highlighter-rouge">Data 0x05</code> (Sets 16-bit RGB565 mode).</p>
+      </li>
+      <li>
+        <p>Rotation: Send Command <code class="language-plaintext highlighter-rouge">0x36</code>, then <code class="language-plaintext highlighter-rouge">Data rot</code>.</p>
+      </li>
+      <li>
+        <p>Display ON: Send <code class="language-plaintext highlighter-rouge">Command 0x29</code>.</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<pre>    void LCD_ST7735_InitSequence(LCD_Driver_t* lcd, LCD_Rotation_t rot, TIM_TypeDef* _timer)
+    {
+        // 1. Assign the timer to the lcd struct and initialize the ticker.
+        // 2. Execute a Hardware Reset using LCD_ST7735_Reset().
+        // 3. Delay 120ms.
+        // 4. Send Command 0x11 (Sleep Out).
+        // 5. Delay 120ms.
+        // 6. Send Command 0x36 (Memory Data Access Control), then Data 'rot'.
+        // 7. Send Command 0x3A (Interface Pixel Format), then Data 0x05 (16-bit color).
+        // 8. Send Command 0x29 (Display ON).
+    }
+</pre>
+
+<h2 id="6️⃣-the-private-helpers-cmd-vs-data">6️⃣ The Private Helpers: Cmd vs Data</h2>
+
+<ul>
+  <li>
+    <p>Goal: Tell the ST7735 if the incoming byte is an instruction (Cmd) or a pixel(Data).</p>
+  </li>
+  <li>
+    <p>For Commands:</p>
+
+    <ul>
+      <li>Pull DC Low (0) — This tells the controller “Instruction incoming.”</li>
+      <li>Pull CS Low (0) — Select the chip.</li>
+      <li>Call <em>SPI_TxRxByte()</em> to send the command byte.</li>
+      <li>Pull CS High (1) — Deselect the chip.</li>
+    </ul>
+  </li>
+  <li>
+    <p>For Data:</p>
+
+    <ul>
+      <li>Pull DC High (1) — This tells the controller “Data/Parameters incoming.”</li>
+      <li>Pull CS Low, send the byte via SPI, then pull CS High.</li>
+      <li>Call <em>SPI_TxRxByte()</em> to send the data byte.</li>
+      <li>Pull CS High (1) — Deselect the chip.</li>
+    </ul>
+  </li>
+</ul>
+
+<pre>    void LCD_ST7735_Cmd(LCD_Driver_t* lcd, uint8_t c) 
+    {
+        // 1. Set the Data/Command (DC) pin LOW to indicate a Command is being sent.
+        // 2. Set Chip Select (CS) LOW to talk to the LCD.
+        // 3. Use your SPI driver to transmit the single byte 'c'.
+        // 4. Set Chip Select (CS) HIGH to finish the communication.
+    }
+
+    void LCD_ST7735_Data(LCD_Driver_t* lcd, uint8_t d) 
+    {
+        // 1. Set the Data/Command (DC) pin HIGH to indicate Data is being sent.
+        // 2. Set Chip Select (CS) LOW to talk to the LCD.
+        // 3. Use your SPI driver to transmit the single byte 'd'.
+        // 4. Set Chip Select (CS) HIGH to finish the communication.
+    }
+</pre>
+
+<h3 id="bulk-transfers-cmdbuf-and-databuf">Bulk Transfers (CmdBuf and DataBuf)</h3>
+
+<ul>
+  <li>
+    <p>Use Case: Streaming pixel data to the screen (like in FillScreen or drawing large shapes). By asserting CS Low just once, you can blast an entire array of memory out of the SPI hardware, drastically improving your frame rate.</p>
+  </li>
+  <li>
+    <p>Logic for CmdBuf (Command Buffer):</p>
+
+    <ul>
+      <li>
+        <p>Pull DC Low (0).</p>
+      </li>
+      <li>
+        <p>Pull CS Low (0).</p>
+      </li>
+      <li>
+        <p>Pass the array pointer (cmdBuf) and the total number of bytes (len) to your block-transmit SPI function (e.g., SPI_TransmitReceive()). Let the hardware handle the loop!</p>
+      </li>
+      <li>
+        <p>Wait for the SPI peripheral to finish, then pull CS High (1).</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<pre>    void LCD_ST7735_CmdBuf(LCD_Driver_t* lcd, uint8_t *cmdBuf, uint8_t *rxDataBuf, uint32_t len)
+    {
+        // 1. Set the Data/Command (DC) pin LOW to indicate a Command is being sent.
+        // 2. Set Chip Select (CS) LOW to talk to the LCD.
+        // 3. Use your SPI driver's "TransmitReceive" function to send the 'txDataBuf'  of length 'len'. 
+        // 4. Set Chip Select (CS) HIGH to finish the communication.
+    }
+</pre>
+
+<ul>
+  <li>
+    <p>Logic for DataBuf (Data Buffer):</p>
+
+    <ul>
+      <li>
+        <p>Pull DC High (1).</p>
+      </li>
+      <li>
+        <p>Pull CS Low (0).</p>
+      </li>
+      <li>
+        <p>Pass the array pointer (txDataBuf) and the length (len) to your block-transmit SPI function.</p>
+      </li>
+      <li>
+        <p>Wait for the transmission to complete, then pull CS High (1).</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<pre>    void LCD_ST7735_Data(LCD_Driver_t* lcd, uint8_t d) 
+    {
+        // 1. Set the Data/Command (DC) pin HIGH.
+        // 2. Set Chip Select (CS) LOW.
+        // 3. Use your SPI driver's "TransmitReceive" function to send the 'txDataBuf'  of length 'len'. 
+        // 4. Set Chip Select (CS) HIGH.
+    }
+</pre>
+
+<h2 id="7️⃣-setaddresswindowx0-y0-x1-y1">7️⃣ SetAddressWindow(x0, y0, x1, y1)</h2>
+
+<ul>
+  <li>
+    <p>Goal: Define the “Drawing Box.”</p>
+  </li>
+  <li>
+    <p>Step 1: Send Command <code class="language-plaintext highlighter-rouge">0x2A</code> (Column Address Set).</p>
+  </li>
+  <li>
+    <p>Step 2: Send 4 Data bytes: <code class="language-plaintext highlighter-rouge">0x00, x0, 0x00, x1</code>. (The 0x00 is because the ST7735 expects 16-bit coordinates, but our screen is only 160 pixels wide).</p>
+  </li>
+  <li>
+    <p>Step 3: Send Command <code class="language-plaintext highlighter-rouge">0x2B</code> (Row Address Set).</p>
+  </li>
+  <li>
+    <p>Step 4: Send 4 Data bytes: <code class="language-plaintext highlighter-rouge">0x00, y0, 0x00, y1</code>.</p>
+  </li>
+  <li>
+    <p>Step 5: Send Command <code class="language-plaintext highlighter-rouge">0x2C</code> (Memory Write). This “opens the gate” for pixel data to flow into the box you just defined.</p>
+  </li>
+</ul>
+
+<pre>    void LCD_ST7735_SetAddressWindow(LCD_Driver_t* lcd, uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1)
+    {
+        // 1. Send Command 0x2A (Column Address Set).
+        // 2. Send 4 Data bytes: 0x00, x0, 0x00, x1.
+        // 3. Send Command 0x2B (Row Address Set).
+        // 4. Send 4 Data bytes: 0x00, y0, 0x00, y1.
+        // 5. Send Command 0x2C (Memory Write) to prepare the LCD for pixel streaming.
+    }
+</pre>
+
+<h2 id="8️⃣-fillscreencolor">8️⃣ FillScreen(color)</h2>
+
+<ul>
+  <li>
+    <p>Goal: Color every single pixel.</p>
+  </li>
+  <li>
+    <p>Step 1: Call <code class="language-plaintext highlighter-rouge">SetAddressWindow(0, 0, WIDTH-1, HEIGHT-1)</code>.</p>
+  </li>
+  <li>Step 2: Prepare a 2-byte buffer.
+    <ul>
+      <li>buf[0] = color&nbsp;» 8 (High Byte)</li>
+      <li>buf[1] = color &amp; 0xFF (Low Byte)</li>
+    </ul>
+  </li>
+  <li>
+    <p>Step 3: Create a loop that runs <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="0" style="font-size: 117.3%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c><mjx-c class="mjx-c36"></mjx-c><mjx-c class="mjx-c30"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-cD7"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="3"><mjx-c class="mjx-c31"></mjx-c><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c38"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>160</mn><mo>×</mo><mn>128</mn></math></mjx-assistive-mml></mjx-container> times (<mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="1" style="font-size: 117.3%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c30"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c2C"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="2"><mjx-c class="mjx-c34"></mjx-c><mjx-c class="mjx-c38"></mjx-c><mjx-c class="mjx-c30"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>20</mn><mo>,</mo><mn>480</mn></math></mjx-assistive-mml></mjx-container> iterations).</p>
+  </li>
+  <li>Step 4: Inside the loop, send that 2-byte buffer using your <code class="language-plaintext highlighter-rouge">DataBuf</code> function.</li>
+</ul>
+
+<pre>    void LCD_ST7735_FillScreen(LCD_Driver_t* lcd, uint16_t color)
+    {
+        // 1. Set the address window to the full size of the screen (0, 0, WIDTH-1, HEIGHT-1).
+        // 2. Prepare an 8-bit buffer with the 16-bit color (High byte first, then Low byte).
+        // 3. Loop through every pixel (Total = WIDTH * HEIGHT).
+        // 4. In each iteration, call LCD_ST7735_DataBuf to send your 2-byte color buffer.
+    }
+</pre>
+
+<h2 id="8️⃣-5-drawcharx-y-char-color-bg">8️⃣ 5. DrawChar(x, y, char, color, bg)</h2>
+
+<ul>
+  <li>
+    <p>Goal: Translate a bitmask (font) into pixels.</p>
+
+    <ul>
+      <li>
+        <p>Step 1: Locate the character in your font array (usually char - 32 for ASCII).</p>
+      </li>
+      <li>
+        <p>Step 2: Outer Loop: Iterate through the 5 columns of the font.</p>
+      </li>
+      <li>
+        <p>Step 3: Inner Loop: Iterate through the 8 bits (rows) of that column’s byte.</p>
+      </li>
+      <li>
+        <p>Step 4: Check the bit:If the bit is</p>
+
+        <ul>
+          <li>1: Call DrawPixel at current <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="2" style="font-size: 117.3%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D465 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2C"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="2"><mjx-c class="mjx-c1D466 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></math></mjx-assistive-mml></mjx-container> using color.</li>
+          <li>If the bit is 0: Call DrawPixel at current <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="3" style="font-size: 117.3%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D465 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2C"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="2"><mjx-c class="mjx-c1D466 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></math></mjx-assistive-mml></mjx-container> using bg (background).</li>
+        </ul>
+      </li>
+      <li>
+        <p>Step 5: Shift your bitmask and increment your coordinates.</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="understanding-the-5x7-font">Understanding the 5x7 Font</h3>
+
+<ul>
+  <li>
+    <p>To draw a character, we don’t send an “A” to the screen; we send a grid of colored pixels. We store these grids in a font array.</p>
+  </li>
+  <li>
+    <p>Our library uses a 5x7 Font. This means each character is 5 pixels wide and 7 pixels tall. However, to make memory alignment easier, we pad the height to 8 pixels (1 byte).</p>
+  </li>
+  <li>
+    <p>Therefore, every character is made up of 5 bytes (one byte per vertical column).</p>
+  </li>
+  <li>
+    <p>Example: The Letter <code class="language-plaintext highlighter-rouge">A</code></p>
+  </li>
+</ul>
+
+<p>Imagine the 5 bytes that make up the letter ‘A’. The bits in each byte represent the pixels in that column from top (Bit 0) to bottom (Bit 7).</p>
+
+<pre>     Col 0  Col 1  Col 2  Col 3  Col 4
+Bit 0:   0      1      1      1      0    (Top of 'A')
+Bit 1:   1      0      0      0      1
+Bit 2:   1      0      0      0      1
+Bit 3:   1      1      1      1      1    (Middle bar of 'A')
+Bit 4:   1      0      0      0      1
+Bit 5:   1      0      0      0      1
+Bit 6:   1      0      0      0      1    (Bottom of 'A')
+Bit 7:   0      0      0      0      0    (Blank space below)
+</pre>
+
+<h4 id="how-the-nested-loop-works">How the Nested Loop Works:</h4>
+
+<ul>
+  <li>
+    <p>The Outer Loop (Columns): Grabs one byte at a time (e.g., Col 0).</p>
+  </li>
+  <li>
+    <p>The Inner Loop (Rows): Looks at the 8 individual bits of that byte.</p>
+  </li>
+  <li>
+    <p>The Bit Mask: We use the bitwise AND operator (&amp; 0x01) to check if the very first bit is a 1 or a 0.</p>
+  </li>
+  <li>
+    <p>If it’s 1, we draw a pixel using the text color.</p>
+  </li>
+  <li>
+    <p>If it’s 0, we draw a pixel using the background color.</p>
+  </li>
+  <li>
+    <p>The Shift: After checking the bit, we shift the byte to the right (»= 1) so the next bit moves into the first position for the next inner loop iteration.</p>
+  </li>
+</ul>
+
+<pre>// 1. BOUNDARY CHECK: 
+    // The font array only contains characters from ASCII 32 (' ') to ASCII 127 ('~').
+    // If 'c' is outside this range, change 'c' to a default character (e.g., '?').
+
+    // 2. GET THE FONT DATA:
+    // Create a pointer to the specific character's 5-byte array.
+    // Example: const uint8_t *bitmap = font5x7[c - 32];
+    // (We subtract 32 because ASCII 32 is at index 0 in our array).
+
+    // 3. OUTER LOOP: Iterate through the 5 columns (Width)
+    // Create a 'for' loop using a variable 'col' from 0 to 4.
+    // {
+        // a. Grab the current column's byte from the bitmap: 
+        //    uint8_t line = bitmap[col];
+        
+        // b. INNER LOOP: Iterate through the 8 bits of this column (Height)
+        //    Create a 'for' loop using a variable 'row' from 0 to 7.
+        //    {
+            // i. Check if the lowest bit is a 1:  if (line &amp; 0x01)
+            //    - If TRUE: Call LCD_ST7735_DrawPixel at (x + col, y + row) with 'color'.
+            //    - If FALSE: Call LCD_ST7735_DrawPixel at (x + col, y + row) with 'bg'.
+            
+            // ii. Shift the 'line' variable right by 1 bit (line &gt;&gt;= 1) 
+            //     so the next bit is ready for the next iteration of the inner loop.
+        //    }
+    // }
+
+    // 4. CHARACTER SPACING:
+    // After the outer loop finishes, the character is drawn! 
+    // But we need a 1-pixel gap between this character and the next one.
+    // Create one final loop from row = 0 to 7, and draw a vertical line of pixels
+    // at x-coordinate (x + 5) using the background color 'bg'.
+</pre>
+
+<h2 id="9️⃣-template-files">9️⃣ Template FIles</h2>
+
+<ul>
+  <li><strong><a href="https://carlosestay.com/courses/CMPE2250/docs/st7735.h">Header File - st7735.h</a></strong></li>
+  <li><strong><a href="https://carlosestay.com/courses/CMPE2250/docs/st7735.c">Source File Template - st7735.c</a></strong></li>
+  <li><strong><a href="https://carlosestay.com/courses/CMPE2250/docs/st7735Fonts.h">Fonts Header - st7735Fonts.h</a></strong></li>
+  <li><strong><a href="https://carlosestay.com/courses/CMPE2250/docs/lcd_colours.h">Colours Header - lcd_colours.h</a></strong></li>
+</ul>
+
+    </div>
+  </div>
+
+</htm></body></html>
