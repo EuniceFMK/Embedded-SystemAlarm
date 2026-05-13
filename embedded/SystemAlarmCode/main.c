@@ -17,6 +17,7 @@ Date    : April-04-2026
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stddef.h>
 #include <string.h>
 #include "stm32g0b1xx.h"
 #include "clock.h"
@@ -26,6 +27,7 @@ Date    : April-04-2026
 #include "timer.h"
 #include "exti.h"
 #include "st7735.h"
+#include "spi.h"
 
 /*********************************************************************
  *
@@ -36,56 +38,53 @@ Date    : April-04-2026
  */
 /*Local Prototypes*/
 
-// #define DMA
-
 void HAL_Init(void);
 
 int main(void)
 {
 
   HAL_Init();
+
+  FLASH->ACR |= FLASH_ACR_PRFTEN_Msk; // Enable instruction prefetch
+  FLASH->ACR |= FLASH_ACR_LATENCY_1;  // Set 2 wait states
+
   Clock_InitPll(PLL_64MHZ);
 
   UART_Init(USART2, 9600, 0);
-  /*Set Baud Rate*/
-  SPI2->CR1 &= ~SPI_CR1_BR;  // Clear BR settings
-  SPI2->CR1 |= SPI_CR1_BR_1; // DIvide by 8 -> 5[MHz]
-  /*Polarity and Phase*/
-  SPI2->CR1 |= SPI_CR1_CPOL | SPI_CR1_CPHA; // Set mode to (1,1) (pol. pha)
-  SPI2->CR1 |= SPI_CR1_MSTR;                // Master Configuration
-  SPI2->CR1 |= SPI_CR1_SSM | SPI_CR1_SSI;   // Soft Slave mngment enabled
-  // 8-bit data  size
-  SPI2->CR2 |= SPI_CR2_DS_2 | SPI_CR2_DS_1 | SPI_CR2_DS_0;
-  SPI2->CR2 |= SPI_CR2_FRXTH; // 8-bit data  event
-  SPI2->CR1 |= SPI_CR1_SPE;   // Enable SPI
+  SPI_Handle_t hspi2;
+  SPI_Init(&hspi2, SPI2);
 
-  GPIO_InitOutput(GPIOD, 5);
-  GPIO_InitOutput(GPIOC, 8);
+  GPIO_InitOutput(GPIOD, 5);    //Chip Select
+  GPIO_InitOutput(GPIOC, 8);     //Reset
   GPIO_InitOutput(GPIOC, 6);
-  GPIO_InitAlternateF(GPIOA, 12, 0);
-  GPIO_InitAlternateF(GPIOB, 3, 0);
+  GPIO_InitAlternateF(GPIOB, 11, 0);   //SPI MOSI 
+  GPIO_InitAlternateF(GPIOB, 13, 0);    //SPI CLOCK
 
   LCD_Driver_t lcd;
 
   LCD_ST7735_HAL_Init(&lcd,
-                      SPI2,
+                      &hspi2,
                       GPIOD, 5,  // CS
                       GPIOC, 8,  // RST
                       GPIOC, 6); // DC
 
-  LCD_ST7735_FillScreen(&lcd, LCD_RED);
-
-  LCD_ST7735_Reset(&lcd);
-
-  LCD_ST7735_InitSequence(&lcd, LCD_ROT_0_P1, TIM2);
+  LCD_ST7735_InitSequence(&lcd, LCD_ROT_270_CW, TIM2);
 
   while (1)
   {
    LCD_ST7735_FillScreen(&lcd, LCD_GREEN);
-     DelayX(50000);
+     DelayX(5000);
 
     LCD_ST7735_FillScreen(&lcd, LCD_BLUE);
-     DelayX(50000);
+     DelayX(5000);
+
+     LCD_ST7735_DrawString(&lcd,
+                      10,
+                      10,
+                      "EUNICE",
+                      LCD_WHITE,
+                      LCD_BLUE);
+     DelayX(5000);
   }
 }
 /********************************************************************/

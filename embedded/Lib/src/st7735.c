@@ -26,12 +26,12 @@ void LCD_ST7735_DataBuf(LCD_Driver_t *lcd, uint8_t *txDataBuf, uint8_t *rxDataBu
 // PUBLIC FUNCTION IMPLEMENTATIONS
 //*************************************************************************************
 
-void LCD_ST7735_HAL_Init(LCD_Driver_t *lcd, SPI_TypeDef *spi,
+void LCD_ST7735_HAL_Init(LCD_Driver_t *lcd, SPI_Handle_t *spi,
                          GPIO_TypeDef *cs_Port, uint16_t cs_Pin,
                          GPIO_TypeDef *rst_Port, uint16_t rst_Pin,
                          GPIO_TypeDef *dc_Port, uint16_t dc_Pin)
 {
-    lcd->spi = spi;
+    lcd->spiHandle = *spi;
     lcd->csPort = cs_Port;
     lcd->csPin = cs_Pin;
     lcd->rstPort = rst_Port;
@@ -48,13 +48,12 @@ void LCD_ST7735_HAL_Init(LCD_Driver_t *lcd, SPI_TypeDef *spi,
 
 void LCD_ST7735_Reset(LCD_Driver_t *lcd)
 {
-     // 1. Pull the RST pin LOW.
-        // 2. Delay for 10ms (Use your Timer_Delay_ms function).
-        // 3. Pull the RST pin HIGH.
-    GPIO_InitOutput(lcd->csPort, lcd->csPin);
-    GPIO_Clear(lcd->rstPort, lcd->csPin);
-    DelayX(10);
-    GPIO_Set(lcd->rstPort, lcd->csPin);
+    // 1. Pull the RST pin LOW.
+    // 2. Delay for 10ms (Use your Timer_Delay_ms function).
+    // 3. Pull the RST pin HIGH.
+    GPIO_Clear(lcd->rstPort, lcd->rstPin);
+    DelayX(100);
+    GPIO_Set(lcd->rstPort, lcd->rstPin);
 }
 
 void LCD_ST7735_InitSequence(LCD_Driver_t *lcd, LCD_Rotation_t rot, TIM_TypeDef *_timer)
@@ -133,8 +132,8 @@ void LCD_ST7735_DrawPixel(LCD_Driver_t *lcd, uint8_t x, uint8_t y, uint16_t colo
 
     // 2. Split the 16-bit color into a 2-byte buffer (High byte then Low byte).
     uint8_t buf[2];
-    buf[0] = color >> 8;      // High byte
-    buf[1] = color & 0xFF;    // Low byte
+    buf[0] = color >> 8;   // High byte
+    buf[1] = color & 0xFF; // Low byte
 
     // 3. Send that 2-byte buffer using LCD_ST7735_DataBuf.
     LCD_ST7735_DataBuf(lcd, buf, NULL, 2);
@@ -153,7 +152,7 @@ void LCD_ST7735_DrawChar(LCD_Driver_t *lcd, uint8_t x, uint8_t y, char c, uint16
     // Create a pointer to the specific character's 5-byte array.
     // Example: const uint8_t *bitmap = font5x7[c - 32];
     // (We subtract 32 because ASCII 32 is at index 0 in our array).
-     const uint8_t *bitmap = font5x7[c - 32];
+    const uint8_t *bitmap = font5x7[c - 32];
 
     // 3. OUTER LOOP: Iterate through the 5 columns (Width)
     // Create a 'for' loop using a variable 'col' from 0 to 4.
@@ -172,7 +171,7 @@ void LCD_ST7735_DrawChar(LCD_Driver_t *lcd, uint8_t x, uint8_t y, char c, uint16
     //     so the next bit is ready for the next iteration of the inner loop.
     //    }
     // }
-     for (uint8_t col = 0; col < 5; col++)
+    for (uint8_t col = 0; col < 5; col++)
     {
         uint8_t line = bitmap[col];
 
@@ -189,13 +188,10 @@ void LCD_ST7735_DrawChar(LCD_Driver_t *lcd, uint8_t x, uint8_t y, char c, uint16
                 // Pixel OFF (background)
                 LCD_ST7735_DrawPixel(lcd, x + col, y + row, bg);
             }
-
             // Shift to next bit
             line >>= 1;
         }
     }
-
-    
 
     // 4. CHARACTER SPACING:
     // After the outer loop finishes, the character is drawn!
@@ -214,6 +210,12 @@ void LCD_ST7735_DrawString(LCD_Driver_t *lcd, uint8_t x, uint8_t y, const char *
     // 2. Call LCD_ST7735_DrawChar at the current (x, y).
     // 3. Increment 'x' by 6 pixels (5 for char width + 1 for spacing).
     // 4. Move to the next character pointer in the string.
+    while (*str)
+    {
+        LCD_ST7735_DrawChar(lcd, x, y, *str, color, bg);
+        x += 6; // Move to the next character position
+        str++;  // Move to the next character in the string
+    }
 }
 
 /******************Private functions**********************/
@@ -225,14 +227,15 @@ void LCD_ST7735_Cmd(LCD_Driver_t *lcd, uint8_t c)
     // 4. Set Chip Select (CS) HIGH to finish the communication.
     GPIO_Clear(lcd->dcPort, lcd->dcPin);
     GPIO_Clear(lcd->csPort, lcd->csPin);
-    // 8-bit data size
-    while (!(SPI2->SR & SPI_SR_TXE))
-        ; // Wait until TX register is empty
-    *((__IO uint8_t *)(&SPI2->DR)) = c;
-    while (!(SPI2->SR & SPI_SR_RXNE))
-        ; // Wait until RX register is not empty
-    // rxData = (__IO uint8_t *)(spi->DR);
-    volatile uint8_t dum = SPI2->DR;
+    SPI_Transmit(&lcd->spiHandle, &c, 1);
+    // // 8-bit data size
+    // while (!(SPI2->SR & SPI_SR_TXE))
+    //     ; // Wait until TX register is empty
+    // *((__IO uint8_t *)(&SPI2->DR)) = c;
+    // while (!(SPI2->SR & SPI_SR_RXNE))
+    //     ; // Wait until RX register is not empty
+    // // rxData = (__IO uint8_t *)(spi->DR);
+    // volatile uint8_t dum = SPI2->DR;
     GPIO_Set(lcd->csPort, lcd->csPin);
 }
 
@@ -245,21 +248,10 @@ void LCD_ST7735_CmdBuf(LCD_Driver_t *lcd, uint8_t *cmdBuf, uint8_t *rxDataBuf, u
     // 4. Set Chip Select (CS) HIGH to finish the communication.
     GPIO_Clear(lcd->dcPort, lcd->dcPin);
     GPIO_Clear(lcd->csPort, lcd->csPin);
-    // 8-bit data size
-    for (uint32_t i = 0; i < len; i++)
-    {
-        while (!(SPI2->SR & SPI_SR_TXE))
-            ; // Wait until TX register is empty
-        *((__IO uint8_t *)(&SPI2->DR)) = cmdBuf[i];
-        while (!(SPI2->SR & SPI_SR_RXNE))
-            ; // Wait until RX register is not empty
-        // rxData = (__IO uint8_t *)(spi->DR);
-        uint8_t data = SPI2->DR;
-        if (rxDataBuf != NULL)
-        {
-            rxDataBuf[i] = data;
-        }
-    }
+    SPI_TransmitReceive(&lcd->spiHandle,
+                        cmdBuf,
+                        rxDataBuf,
+                        len);
 
     GPIO_Set(lcd->csPort, lcd->csPin);
 }
@@ -270,17 +262,10 @@ void LCD_ST7735_Data(LCD_Driver_t *lcd, uint8_t d)
     // 2. Set Chip Select (CS) LOW to talk to the LCD.
     // 3. Use your SPI driver to transmit the single byte 'd'.
     // 4. Set Chip Select (CS) HIGH to finish the communication.
-    volatile uint8_t dummy;
+
     GPIO_Set(lcd->dcPort, lcd->dcPin);
     GPIO_Clear(lcd->csPort, lcd->csPin);
-    // 8-bit data size
-    while (!(SPI2->SR & SPI_SR_TXE))
-        ; // Wait until TX register is empty
-    *((__IO uint8_t *)(&SPI2->DR)) = d;
-    while (!(SPI2->SR & SPI_SR_RXNE))
-        ; // Wait until RX register is not empty
-    // rxData = (__IO uint8_t *)(spi->DR);
-    dummy = SPI2->DR;
+    SPI_Transmit(&lcd->spiHandle, &d, 1);
     GPIO_Set(lcd->csPort, lcd->csPin);
 }
 //-------------------------------------------------------------------------------------
@@ -293,21 +278,10 @@ void LCD_ST7735_DataBuf(LCD_Driver_t *lcd, uint8_t *txDataBuf, uint8_t *rxDataBu
 
     GPIO_Set(lcd->dcPort, lcd->dcPin);
     GPIO_Clear(lcd->csPort, lcd->csPin);
-    for (uint32_t i = 0; i < len; i++)
-    {
-        while (!(SPI2->SR & SPI_SR_TXE))
-            ; // Wait until TX register is empty
-        *((__IO uint8_t *)(&SPI2->DR)) = txDataBuf[i];
-        while (!(SPI2->SR & SPI_SR_RXNE))
-            ; // Wait until RX register is not empty
-              // rxData = (__IO uint8_t *)(spi->DR);
-        uint8_t data = SPI2->DR;
-        // Store only if buffer exists
-        if (rxDataBuf != NULL)
-        {
-            rxDataBuf[i] = data;
-        }
-    }
+    SPI_TransmitReceive(&lcd->spiHandle,
+                        txDataBuf,
+                        rxDataBuf,
+                        len);
     GPIO_Set(lcd->csPort, lcd->csPin);
 }
 
