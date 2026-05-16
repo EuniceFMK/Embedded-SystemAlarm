@@ -28,6 +28,7 @@ Date    : April-04-2026
 #include "exti.h"
 #include "st7735.h"
 #include "spi.h"
+#include "state_machine.h"
 
 /*********************************************************************
  *
@@ -69,22 +70,24 @@ int main(void)
                       GPIOC, 6); // DC
 
   LCD_ST7735_InitSequence(&lcd, LCD_ROT_270_CW, TIM2);
+LCD_ST7735_FillScreen(&lcd, LCD_BLACK);
 
+LCD_ST7735_DrawString(&lcd,
+                      10,
+                      10,
+                      "SMART ALARM",
+                      LCD_WHITE,
+                      LCD_BLACK);
+
+LCD_ST7735_DrawString(&lcd,
+                      10,
+                      30,
+                      "STATUS: OFF",
+                      LCD_GREEN,
+                      LCD_BLACK);
   while (1)
   {
-   LCD_ST7735_FillScreen(&lcd, LCD_GREEN);
-     DelayX(5000);
-
-    LCD_ST7735_FillScreen(&lcd, LCD_BLUE);
-     DelayX(5000);
-
-     LCD_ST7735_DrawString(&lcd,
-                      10,
-                      10,
-                      "EUNICE",
-                      LCD_WHITE,
-                      LCD_BLUE);
-     DelayX(5000);
+  
   }
 }
 /********************************************************************/
